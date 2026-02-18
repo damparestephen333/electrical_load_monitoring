@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -14,6 +13,29 @@ struct Appliance {
     double watts;
     double hours;
 };
+
+// Function to register appliance
+void registerAppliance(Appliance appliances[], int &count) {
+
+    if (count >= MAX) {
+        cout << "Maximum appliances reached.\n";
+        return;
+    }
+
+    cout << "Enter appliance name: ";
+    getline(cin, appliances[count].name);
+
+    cout << "Enter power (watts): ";
+    cin >> appliances[count].watts;
+
+    cout << "Enter hours used per day: ";
+    cin >> appliances[count].hours;
+    cin.ignore();
+
+    count++;
+
+    cout << "Appliance registered successfully.\n";
+}
 
 int main() {
     Appliance appliances[MAX];
@@ -34,22 +56,18 @@ int main() {
         switch (choice) {
 
             case 1:
-            
-                // TODO: Add register appliance function
+                registerAppliance(appliances, count);
                 break;
 
             case 2:
-                
                 // TODO: Display all appliances
                 break;
 
             case 3:
-                
                 // TODO: Calculate energy and billing
                 break;
 
             case 4:
-                
                 // TODO: Save appliances to file
                 break;
 
@@ -65,3 +83,4 @@ int main() {
 
     return 0;
 }
+
