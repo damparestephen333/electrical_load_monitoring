@@ -14,6 +14,11 @@ struct Appliance {
     double hours;
 };
 
+// Function to calculate kWh
+double calcKwh(double watts, double hours) {
+    return (watts / 1000.0) * hours;
+}
+
 // Function to register appliance
 void registerAppliance(Appliance appliances[], int &count) {
 
@@ -35,6 +40,28 @@ void registerAppliance(Appliance appliances[], int &count) {
     count++;
 
     cout << "Appliance registered successfully.\n";
+}
+
+// Function to view appliances
+void viewAppliances(Appliance appliances[], int count) {
+
+    if (count == 0) {
+        cout << "No appliances registered.\n";
+        return;
+    }
+
+    cout << fixed << setprecision(2);
+
+    cout << "\n--- Appliance List ---\n";
+
+    for (int i = 0; i < count; i++) {
+        cout << i + 1 << ". "
+             << appliances[i].name << " | "
+             << appliances[i].watts << " W | "
+             << appliances[i].hours << " hrs | "
+             << calcKwh(appliances[i].watts, appliances[i].hours)
+             << " kWh/day\n";
+    }
 }
 
 int main() {
@@ -60,14 +87,16 @@ int main() {
                 break;
 
             case 2:
-                // TODO: Display all appliances
+                viewAppliances(appliances, count);
                 break;
 
             case 3:
+                // billing(appliances, count);
                 // TODO: Calculate energy and billing
                 break;
 
             case 4:
+                // saveAppliances(appliances, count);
                 // TODO: Save appliances to file
                 break;
 
@@ -83,4 +112,3 @@ int main() {
 
     return 0;
 }
-
