@@ -14,9 +14,20 @@ struct Appliance {
     double hours;
 };
 
-// Function to calculate kWh
+// Function to calculate kWh for one appliance
 double calcKwh(double watts, double hours) {
     return (watts / 1000.0) * hours;
+}
+
+// Function to calculate total daily kWh
+double totalDailyKwh(Appliance appliances[], int count) {
+    double total = 0;
+
+    for (int i = 0; i < count; i++) {
+        total += calcKwh(appliances[i].watts, appliances[i].hours);
+    }
+
+    return total;
 }
 
 // Function to register appliance
@@ -51,7 +62,6 @@ void viewAppliances(Appliance appliances[], int count) {
     }
 
     cout << fixed << setprecision(2);
-
     cout << "\n--- Appliance List ---\n";
 
     for (int i = 0; i < count; i++) {
@@ -92,7 +102,7 @@ int main() {
 
             case 3:
                 // billing(appliances, count);
-                // TODO: Calculate energy and billing
+                // TODO: Use totalDailyKwh() to compute billing
                 break;
 
             case 4:
